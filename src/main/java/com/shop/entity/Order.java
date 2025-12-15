@@ -9,6 +9,10 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
@@ -20,11 +24,13 @@ public class Order {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "customer_id", nullable = false)
-	private Long customerId;
+	@ManyToOne
+	@JoinColumn(name = "user_id", nullable = false)
+	private User user;
 
-	@Column(name = "address_id", nullable = false)
-	private Long addressId;
+	@OneToOne
+	@JoinColumn(name = "address_id", nullable = false)
+	private Address addressId;
 
 	@Column(name = "total_amount", nullable = false)
 	private BigDecimal totalAmount;
@@ -53,19 +59,19 @@ public class Order {
 		this.id = id;
 	}
 
-	public Long getCustomerId() {
-		return customerId;
+	public User getUser() {
+		return user;
 	}
 
-	public void setCustomerId(Long customerId) {
-		this.customerId = customerId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	public Long getAddressId() {
+	public Address getAddressId() {
 		return addressId;
 	}
 
-	public void setAddressId(Long addressId) {
+	public void setAddressId(Address addressId) {
 		this.addressId = addressId;
 	}
 

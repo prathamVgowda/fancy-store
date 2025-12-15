@@ -26,7 +26,7 @@ public class AddressServiceImpl implements AddressService {
 	public Address updateAddress(Long id, Address address) {
 		Address existing = addressRepository.findById(id).orElseThrow(() -> new RuntimeException("Address not found"));
 
-		existing.setCustomerId(address.getCustomerId());
+		existing.setUser(address.getUser());
 		existing.setFullName(address.getFullName());
 		existing.setAddress(address.getAddress());
 		existing.setCity(address.getCity());

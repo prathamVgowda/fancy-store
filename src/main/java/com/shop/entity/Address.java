@@ -7,6 +7,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,8 +19,9 @@ public class Address {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "customer_id", nullable = false)
-	private String customerId;
+	@ManyToOne
+	@JoinColumn(name = "user_id", nullable = false)
+	private User user;
 
 	@Column(nullable = false)
 	private String fullName;
@@ -40,8 +43,7 @@ public class Address {
 	private AddressType type;
 
 	// ENUM
-	public enum AddressType 
-	{
+	public enum AddressType {
 		HOME, WORK
 	}
 
@@ -54,12 +56,12 @@ public class Address {
 		this.id = id;
 	}
 
-	public String getCustomerId() {
-		return customerId;
+	public User getUser() {
+		return user;
 	}
 
-	public void setCustomerId(String customerId) {
-		this.customerId = customerId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public String getFullName() {

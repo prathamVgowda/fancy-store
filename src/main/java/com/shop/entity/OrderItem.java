@@ -5,6 +5,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.math.BigDecimal;
 
@@ -16,9 +19,13 @@ public class OrderItem {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private String orderId;
+	@ManyToOne
+	@JoinColumn(name = "order_id")
+	private Order orderId;
 
-	private String productVariantId;
+	@ManyToOne
+	@JoinColumn(name = "product_id")
+	private Products productVariantId;
 
 	@Column(nullable = false)
 	private Integer quantity;
@@ -34,19 +41,19 @@ public class OrderItem {
 		this.id = id;
 	}
 
-	public String getOrderId() {
+	public Order getOrderId() {
 		return orderId;
 	}
 
-	public void setOrderId(String orderId) {
+	public void setOrderId(Order orderId) {
 		this.orderId = orderId;
 	}
 
-	public String getProductVariantId() {
+	public Products getProductVariantId() {
 		return productVariantId;
 	}
 
-	public void setProductVariantId(String productVariantId) {
+	public void setProductVariantId(Products productVariantId) {
 		this.productVariantId = productVariantId;
 	}
 

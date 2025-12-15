@@ -17,7 +17,9 @@ public class Products {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private String categoryLink;
+	@ManyToOne
+	@JoinColumn(name = "category_id")
+	private Category category;
 
 	@Column(name = "product_name")
 	private String productName;
@@ -29,8 +31,8 @@ public class Products {
 	private Double price;
 
 	@ManyToOne
-	@JoinColumn(name = "brand_link", referencedColumnName = "id")
-	private BrandMaster brandLink;
+	@JoinColumn(name = "brand", referencedColumnName = "id")
+	private BrandMaster brand;
 
 	@Column(name = "status")
 	private String status;
@@ -44,15 +46,15 @@ public class Products {
 	public Products() {
 	}
 
-	public Products(Long id, String categoryLink, String productName, String description, Double price,
-			BrandMaster brandLink, String status, String createdBy, String updatedBy) {
-
+	public Products(Long id, Category category, String productName, String description, Double price, BrandMaster brand,
+			String status, String createdBy, String updatedBy) {
+		super();
 		this.id = id;
-		this.categoryLink = categoryLink;
+		this.category = category;
 		this.productName = productName;
 		this.description = description;
 		this.price = price;
-		this.brandLink = brandLink;
+		this.brand = brand;
 		this.status = status;
 		this.createdBy = createdBy;
 		this.updatedBy = updatedBy;
@@ -66,12 +68,12 @@ public class Products {
 		this.id = id;
 	}
 
-	public String getCategoryLink() {
-		return categoryLink;
+	public Category getCategory() {
+		return category;
 	}
 
-	public void setCategoryLink(String categoryLink) {
-		this.categoryLink = categoryLink;
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 	public String getProductName() {
@@ -98,12 +100,12 @@ public class Products {
 		this.price = price;
 	}
 
-	public BrandMaster getBrandLink() {
-		return brandLink;
+	public BrandMaster getBrand() {
+		return brand;
 	}
 
-	public void setBrandLink(BrandMaster brandLink) {
-		this.brandLink = brandLink;
+	public void setBrand(BrandMaster brand) {
+		this.brand = brand;
 	}
 
 	public String getStatus() {
@@ -129,4 +131,5 @@ public class Products {
 	public void setUpdatedBy(String updatedBy) {
 		this.updatedBy = updatedBy;
 	}
+
 }

@@ -26,7 +26,7 @@ public class OrderServiceImpl implements OrderService {
 	public Order updateOrder(Long id, Order updated) {
 		Order existing = repository.findById(id).orElseThrow(() -> new RuntimeException("Order not found"));
 
-		existing.setCustomerId(updated.getCustomerId());
+		existing.setUser(updated.getUser());
 		existing.setAddressId(updated.getAddressId());
 		existing.setTotalAmount(updated.getTotalAmount());
 		existing.setStatus(updated.getStatus());

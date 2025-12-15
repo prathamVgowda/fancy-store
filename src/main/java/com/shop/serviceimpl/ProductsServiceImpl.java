@@ -1,4 +1,4 @@
-package com.shop.service;
+package com.shop.serviceimpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.shop.entity.Products;
 import com.shop.exception.ResourceNotFoundException;
 import com.shop.repository.ProductsRepository;
+import com.shop.service.ProductsService;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -42,11 +43,11 @@ public class ProductsServiceImpl implements ProductsService {
 			return new ResourceNotFoundException("Product with the given ID not found", 404, LocalDateTime.now());
 		});
 
-		existingProduct.setCategoryLink(product.getCategoryLink());
+		existingProduct.setCategory(product.getCategory());
 		existingProduct.setProductName(product.getProductName());
 		existingProduct.setDescription(product.getDescription());
 		existingProduct.setPrice(product.getPrice());
-		existingProduct.setBrandLink(product.getBrandLink());
+		existingProduct.setBrand(product.getBrand());
 		existingProduct.setStatus(product.getStatus());
 		existingProduct.setCreatedBy(product.getCreatedBy());
 		existingProduct.setUpdatedBy(product.getUpdatedBy());

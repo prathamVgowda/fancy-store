@@ -6,7 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,7 +17,9 @@ public class Stock {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private String product;
+	@OneToOne
+    @JoinColumn(name = "product_id", unique = true)
+	private Products product;
 
 	@Column(name = "balance")
 	private Integer balance;
@@ -38,7 +40,7 @@ public class Stock {
 	public Stock() {
 	}
 
-	public Stock(String product, Integer balance, Integer inward, Integer outward, TransactionType transactionType) {
+	public Stock(Products product, Integer balance, Integer inward, Integer outward, TransactionType transactionType) {
 		this.product = product;
 		this.balance = balance;
 		this.inward = inward;
@@ -54,11 +56,11 @@ public class Stock {
 		this.id = id;
 	}
 
-	public String getProduct() {
+	public Products getProduct() {
 		return product;
 	}
 
-	public void setProduct(String product) {
+	public void setProduct(Products product) {
 		this.product = product;
 	}
 
