@@ -2,18 +2,17 @@ package com.shop.service;
 
 import java.util.List;
 
-import com.shop.entity.Order;
+import com.shop.dto.OrderDTO;
 
 public interface OrderService {
 
-	Order createOrder(Order order);
+    OrderDTO createOrder(OrderDTO orderDto);
 
-	Order updateOrder(Long id, Order order);
+    OrderDTO updateOrder(Long id, OrderDTO orderDto);
 
-	void deleteOrder(Long id);
+    void deleteOrder(Long id);
 
-	Order getOrderById(Long id);
+    OrderDTO getOrderById(Long id);
 
-	List<Order> getAllOrders();
-
+    List<OrderDTO> getAllOrders();
 }

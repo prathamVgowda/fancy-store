@@ -1,0 +1,67 @@
+package com.shop.dto;
+
+public class StockDTO {
+
+	private Long id;
+
+    private Long productId;
+
+    private Integer balance;
+
+    private Integer inward; 
+
+    private Integer outward;
+
+    private String transactionType;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getProductId() {
+		return productId;
+	}
+
+	public void setProductId(Long productId) {
+		this.productId = productId;
+	}
+
+	public Integer getBalance() {
+		return balance;
+	}
+
+	public void setBalance(Integer balance) {
+		this.balance = balance;
+	}
+
+	public Integer getInward() {
+		return inward;
+	}
+
+	public void setInward(Integer inward) {
+		this.inward = inward;
+	}
+
+	public Integer getOutward() {
+		return outward;
+	}
+
+	public void setOutward(Integer outward) {
+		this.outward = outward;
+	}
+
+	public String getTransactionType() {
+		return transactionType;
+	}
+
+	public void setTransactionType(String transactionType) {
+		this.transactionType = transactionType;
+	}
+    
+    
+    
+}
