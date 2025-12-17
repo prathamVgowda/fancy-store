@@ -1,64 +1,50 @@
 package com.shop.serviceimpl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.shop.dto.BrandMasterDTO;
 import com.shop.entity.BrandMaster;
-import com.shop.exception.ResourceNotFoundException;
+import com.shop.mapper.BrandMasterMapper;
 import com.shop.repository.BrandMasterRepository;
 import com.shop.service.BrandMasterService;
-
-import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class BrandMasterServiceImpl implements BrandMasterService {
 
-	@Autowired
-	private BrandMasterRepository brandMasterRepository;
+	private final BrandMasterRepository repo;
 
-	@Override
-	public BrandMaster createBrand(BrandMaster brand) {
-		return brandMasterRepository.save(brand);
+	public BrandMasterServiceImpl(BrandMasterRepository repo) {
+		this.repo = repo;
 	}
 
 	@Override
-	public BrandMaster getByIdBrand(Long brandId) {
-
-		BrandMaster brand = brandMasterRepository.findById(brandId).orElseThrow(() -> {
-			return new ResourceNotFoundException("Brand with the given ID not found", 404, LocalDateTime.now());
-		});
-
-		return brand;
+	public BrandMasterDTO create(BrandMasterDTO dto) {
+		BrandMaster brand = BrandMasterMapper.toEntity(dto);
+		return BrandMasterMapper.toDto(repo.save(brand));
 	}
 
 	@Override
-	public List<BrandMaster> getAllBrand() {
-		return brandMasterRepository.findAll();
+	public BrandMasterDTO update(Long id, BrandMasterDTO dto) {
+		BrandMaster existing = repo.findById(id).orElseThrow(() -> new RuntimeException("Brand not found"));
+
+		BrandMasterMapper.copyToExisting(existing, dto);
+		return BrandMasterMapper.toDto(repo.save(existing));
 	}
 
 	@Override
-	public BrandMaster updateByBrand(Long brandId, BrandMaster brand) {
-
-		BrandMaster existingBrand = brandMasterRepository.findById(brandId).orElseThrow(() -> {
-			return new ResourceNotFoundException("Brand with the given ID not found", 404, LocalDateTime.now());
-		});
-
-		existingBrand.setBrandName(brand.getBrandName());
-
-		BrandMaster updatedBrand = brandMasterRepository.save(existingBrand);
-		return updatedBrand;
+	public BrandMasterDTO getById(Long id) {
+		return BrandMasterMapper.toDto(repo.findById(id).orElseThrow(() -> new RuntimeException("Brand not found")));
 	}
 
 	@Override
-	public String deleteByBrand(Long brandId) {
+	public List<BrandMasterDTO> getAll() {
+		return repo.findAll().stream().map(BrandMasterMapper::toDto).collect(Collectors.toList());
+	}
 
-		if (!brandMasterRepository.existsById(brandId)) {
-			throw new ResourceNotFoundException("Brand with the given ID not found", 404, LocalDateTime.now());
-		}
-
-		brandMasterRepository.deleteById(brandId);
-
-		return "Brand deleted successfully!";
+	@Override
+	public void delete(Long id) {
+		repo.deleteById(id);
 	}
 }

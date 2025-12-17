@@ -2,17 +2,17 @@ package com.shop.service;
 
 import java.util.List;
 
-import com.shop.entity.Category;
+import com.shop.dto.CategoryDTO;
 
 public interface CategoryService {
 
-	Category createCategory(Category category);
+	CategoryDTO create(CategoryDTO dto);
 
-	Category getByIdCategory(Long categoryId);
+	CategoryDTO update(Long id, CategoryDTO dto);
 
-	List<Category> getAllCategories();
+	CategoryDTO getById(Long id);
 
-	Category updateByCategory(Long categoryId, Category category);
+	List<CategoryDTO> getAll();
 
-	String deleteByCategory(Long categoryId);
+	void delete(Long id);
 }

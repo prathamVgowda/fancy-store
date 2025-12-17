@@ -2,16 +2,25 @@ package com.shop.dto;
 
 import java.math.BigDecimal;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+
 public class OrderDTO {
 
 	private Long id;
 
+	@NotNull(message = "User ID is required")
 	private Long userId;
 
+	@NotNull(message = "Address ID is required")
 	private Long addressId;
 
+	@NotNull(message = "Total amount is required")
+	@Positive(message = "Total amount must be greater than zero")
 	private BigDecimal totalAmount;
 
+	@NotBlank(message = "Order status is required")
 	private String status;
 
 	public Long getId() {
@@ -53,6 +62,5 @@ public class OrderDTO {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
-	
+
 }

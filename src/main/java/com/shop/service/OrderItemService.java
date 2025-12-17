@@ -2,18 +2,17 @@ package com.shop.service;
 
 import java.util.List;
 
-import com.shop.entity.OrderItem;
+import com.shop.dto.OrderItemDTO;
 
 public interface OrderItemService {
 
-	OrderItem createOrderItem(OrderItem item);
+    OrderItemDTO createOrderItem(OrderItemDTO dto);
 
-	OrderItem updateOrderItem(Long id, OrderItem item);
+    OrderItemDTO updateOrderItem(Long id, OrderItemDTO dto);
 
-	void deleteOrderItem(Long id);
+    void deleteOrderItem(Long id);
 
-	OrderItem getOrderItem(Long id);
+    OrderItemDTO getOrderItemById(Long id);
 
-	List<OrderItem> getAllOrderItems();
-
+    List<OrderItemDTO> getAllOrderItems();
 }

@@ -24,7 +24,7 @@ public class OrderItem {
 
 	@ManyToOne
 	@JoinColumn(name = "product_id")
-	private Products productVariantId;
+	private Product productVariantId;
 
 	@Column(nullable = false)
 	private Integer quantity;
@@ -48,11 +48,11 @@ public class OrderItem {
 		this.orderId = orderId;
 	}
 
-	public Products getProductVariantId() {
+	public Product getProductVariantId() {
 		return productVariantId;
 	}
 
-	public void setProductVariantId(Products productVariantId) {
+	public void setProductVariantId(Product productVariantId) {
 		this.productVariantId = productVariantId;
 	}
 

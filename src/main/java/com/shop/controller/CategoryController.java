@@ -1,9 +1,8 @@
 package com.shop.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.shop.entity.Category;
+import com.shop.dto.CategoryDTO;
 import com.shop.service.CategoryService;
 
 import java.util.List;
@@ -12,32 +11,35 @@ import java.util.List;
 @RequestMapping("/api/categories")
 public class CategoryController {
 
-	@Autowired
-	private CategoryService categoryService;
+    private final CategoryService service;
 
-	@PostMapping
-	public Category createCategory(@RequestBody Category category) {
-		return categoryService.createCategory(category);
-	}
+    public CategoryController(CategoryService service) {
+        this.service = service;
+    }
 
-	@GetMapping("/{id}")
-	public Category getCategory(@PathVariable Long id) {
-		return categoryService.getByIdCategory(id);
-	}
+    @PostMapping
+    public CategoryDTO create(@RequestBody CategoryDTO dto) {
+        return service.create(dto);
+    }
 
-	@GetMapping
-	public List<Category> getAllCategories() {
-		return categoryService.getAllCategories();
-	}
+    @GetMapping("/{id}")
+    public CategoryDTO getById(@PathVariable Long id) {
+        return service.getById(id);
+    }
 
-	@PutMapping("/{id}")
-	public Category updateCategory(@PathVariable Long id, @RequestBody Category category) {
-		return categoryService.updateByCategory(id, category);
-	}
+    @GetMapping
+    public List<CategoryDTO> getAll() {
+        return service.getAll();
+    }
 
-	@DeleteMapping("/{id}")
-	public String deleteCategory(@PathVariable Long id) {
-		categoryService.deleteByCategory(id);
-		return "Category deleted successfully!";
-	}
+    @PutMapping("/{id}")
+    public CategoryDTO update(@PathVariable Long id, @RequestBody CategoryDTO dto) {
+        return service.update(id, dto);
+    }
+
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable Long id) {
+        service.delete(id);
+        return "Category deleted successfully";
+    }
 }

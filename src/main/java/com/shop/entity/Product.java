@@ -11,7 +11,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "products")
-public class Products {
+public class Product {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,10 +43,10 @@ public class Products {
 	@Column(name = "updated_by")
 	private String updatedBy;
 
-	public Products() {
+	public Product() {
 	}
 
-	public Products(Long id, Category category, String productName, String description, Double price, BrandMaster brand,
+	public Product(Long id, Category category, String productName, String description, Double price, BrandMaster brand,
 			String status, String createdBy, String updatedBy) {
 		super();
 		this.id = id;

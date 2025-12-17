@@ -1,22 +1,33 @@
 package com.shop.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+
 public class AddressDTO {
-	
+
 	private Long id;
 
-    private Long userId;
+	@NotBlank(message = "User ID is required")
+	private Long userId;
 
-    private String fullName;
+	@NotBlank(message = "Full name is required")
+	private String fullName;
 
-    private String address;
+	@NotBlank(message = "Address is required")
+	private String address;
 
-    private String city;
+	@NotBlank(message = "City is required")
+	private String city;
 
-    private String state;
+	@NotBlank(message = "State is required")
+	private String state;
 
-    private String pincode;
+	@NotBlank(message = "Pincode is required")
+	@Pattern(regexp = "^[1-9][0-9]{5}$", message = "Pincode must be a valid 6-digit Indian pincode")
+	private String pincode;
 
-    private String type;
+	@NotBlank(message = "Address type is required")
+	private String type;
 
 	public Long getId() {
 		return id;
@@ -81,7 +92,5 @@ public class AddressDTO {
 	public void setType(String type) {
 		this.type = type;
 	}
-    
-    
 
 }

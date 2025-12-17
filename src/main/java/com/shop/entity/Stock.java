@@ -19,7 +19,7 @@ public class Stock {
 
 	@OneToOne
     @JoinColumn(name = "product_id", unique = true)
-	private Products product;
+	private Product product;
 
 	@Column(name = "balance")
 	private Integer balance;
@@ -40,7 +40,7 @@ public class Stock {
 	public Stock() {
 	}
 
-	public Stock(Products product, Integer balance, Integer inward, Integer outward, TransactionType transactionType) {
+	public Stock(Product product, Integer balance, Integer inward, Integer outward, TransactionType transactionType) {
 		this.product = product;
 		this.balance = balance;
 		this.inward = inward;
@@ -56,11 +56,11 @@ public class Stock {
 		this.id = id;
 	}
 
-	public Products getProduct() {
+	public Product getProduct() {
 		return product;
 	}
 
-	public void setProduct(Products product) {
+	public void setProduct(Product product) {
 		this.product = product;
 	}
 

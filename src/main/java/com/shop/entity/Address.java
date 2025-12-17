@@ -42,12 +42,10 @@ public class Address {
 	@Column(nullable = false)
 	private AddressType type;
 
-	// ENUM
 	public enum AddressType {
 		HOME, WORK
 	}
 
-	// Getters and setters
 	public Long getId() {
 		return id;
 	}

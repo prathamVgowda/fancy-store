@@ -1,16 +1,24 @@
 package com.shop.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+
 public class ProductDTO {
 	private Long id;
 
-	private String productName;
+	@NotBlank(message = "Product name is required")
+    private String productName;
 
-	private Double price;
+    @NotNull(message = "Price is required")
+    @Positive(message = "Price must be greater than zero")
+    private Double price;
 
-	private String categoryName;
+    @NotBlank(message = "Category name is required")
+    private String categoryName;
 
-	private String brandName;
-
+    @NotBlank(message = "Brand name is required")
+    private String brandName;
 	public Long getId() {
 		return id;
 	}

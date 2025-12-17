@@ -2,18 +2,16 @@ package com.shop.service;
 
 import java.util.List;
 
-import com.shop.entity.Color;
+import com.shop.dto.ColorDTO;
 
 public interface ColorService {
+	ColorDTO create(ColorDTO dto);
 
-    Color createColor(Color color);
+	ColorDTO update(Long id, ColorDTO dto);
 
-    Color getByIdColor(Long colorId);
+	ColorDTO getById(Long id);
 
-    List<Color> getAllColor();
+	List<ColorDTO> getAll();
 
-    Color updateByColor(Long colorId, Color color);
-
-    String deleteByColor(Long colorId);
+	void delete(Long id);
 }
-

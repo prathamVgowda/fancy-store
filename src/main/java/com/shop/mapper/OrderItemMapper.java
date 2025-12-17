@@ -2,8 +2,8 @@ package com.shop.mapper;
 
 import com.shop.dto.OrderItemDTO;
 import com.shop.entity.OrderItem;
+import com.shop.entity.Product;
 import com.shop.entity.Order;
-import com.shop.entity.Products;
 
 public class OrderItemMapper {
 
@@ -19,7 +19,7 @@ public class OrderItemMapper {
 		return dto;
 	}
 
-	public static OrderItem toEntity(OrderItemDTO dto, Order order, Products product) {
+	public static OrderItem toEntity(OrderItemDTO dto, Order order, Product product) {
 		OrderItem item = new OrderItem();
 
 		item.setId(dto.getId());
@@ -31,7 +31,7 @@ public class OrderItemMapper {
 		return item;
 	}
 
-	public static void copyToExisting(OrderItem existing, OrderItemDTO dto, Order order, Products product) {
+	public static void copyToExisting(OrderItem existing, OrderItemDTO dto, Order order, Product product) {
 		existing.setOrderId(order);
 		existing.setProductVariantId(product);
 		existing.setQuantity(dto.getQuantity());

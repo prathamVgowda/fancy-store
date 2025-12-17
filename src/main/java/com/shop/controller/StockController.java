@@ -3,9 +3,8 @@ package com.shop.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.shop.entity.Stock;
+import com.shop.dto.StockDTO;
 import com.shop.service.StockService;
-
 import java.util.List;
 
 @RestController
@@ -16,27 +15,28 @@ public class StockController {
 	private StockService stockService;
 
 	@PostMapping("/create")
-	public Stock createStock(@RequestBody Stock stock) {
-		return stockService.createStock(stock);
+	public StockDTO createStock(@RequestBody StockDTO dto) {
+		return stockService.createStock(dto);
 	}
 
 	@GetMapping("/{stockId}")
-	public Stock getStockById(@PathVariable Long stockId) {
+	public StockDTO getStockById(@PathVariable Long stockId) {
 		return stockService.getStockById(stockId);
 	}
 
 	@GetMapping("/all")
-	public List<Stock> getAllStocks() {
+	public List<StockDTO> getAllStocks() {
 		return stockService.getAllStocks();
 	}
 
 	@PutMapping("/update/{stockId}")
-	public Stock updateStock(@PathVariable Long stockId, @RequestBody Stock stock) {
-		return stockService.updateStock(stockId, stock);
+	public StockDTO updateStock(@PathVariable Long stockId, @RequestBody StockDTO dto) {
+		return stockService.updateStock(stockId, dto);
 	}
 
 	@DeleteMapping("/delete/{stockId}")
 	public String deleteStock(@PathVariable Long stockId) {
-		return stockService.deleteStock(stockId);
+		stockService.deleteStock(stockId);
+		return "Stock deleted successfully!";
 	}
 }

@@ -1,61 +1,66 @@
 package com.shop.serviceimpl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.shop.entity.Stock;
-import com.shop.exception.ResourceNotFoundException;
+import com.shop.repository.ProductRepository;
 import com.shop.repository.StockRepository;
 import com.shop.service.StockService;
-
-import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
+import com.shop.dto.StockDTO;
+import com.shop.entity.Product;
+import com.shop.entity.Stock;
+import com.shop.mapper.StockMapper;
 
 @Service
 public class StockServiceImpl implements StockService {
 
-	@Autowired
-	private StockRepository stockRepository;
+	private final StockRepository stockRepo;
+	private final ProductRepository productRepo;
 
-	@Override
-	public Stock createStock(Stock stock) {
-		return stockRepository.save(stock);
+	public StockServiceImpl(StockRepository stockRepo, ProductRepository productRepo) {
+		this.stockRepo = stockRepo;
+		this.productRepo = productRepo;
 	}
 
 	@Override
-	public Stock getStockById(Long stockId) {
-		return stockRepository.findById(stockId)
-				.orElseThrow(() -> new ResourceNotFoundException("Stock entry with the given ID not found", 404,
-						LocalDateTime.now()));
+	public StockDTO createStock(StockDTO dto) {
+
+		Product product = productRepo.findById(dto.getProductId())
+				.orElseThrow(() -> new RuntimeException("Product not found"));
+
+		Stock stock = StockMapper.toEntity(dto, product);
+
+		Stock saved = stockRepo.save(stock);
+
+		return StockMapper.toDto(saved);
 	}
 
 	@Override
-	public List<Stock> getAllStocks() {
-		return stockRepository.findAll();
+	public StockDTO updateStock(Long id, StockDTO dto) {
+
+		Stock existing = stockRepo.findById(id).orElseThrow(() -> new RuntimeException("Stock not found"));
+
+		Product product = productRepo.findById(dto.getProductId())
+				.orElseThrow(() -> new RuntimeException("Product not found"));
+
+		StockMapper.copyToExisting(existing, dto, product);
+
+		return StockMapper.toDto(stockRepo.save(existing));
 	}
 
 	@Override
-	public Stock updateStock(Long stockId, Stock stock) {
-		Stock existingStock = stockRepository.findById(stockId)
-				.orElseThrow(() -> new ResourceNotFoundException("Stock entry with the given ID not found", 404,
-						LocalDateTime.now()));
-
-		existingStock.setProduct(stock.getProduct());
-		existingStock.setBalance(stock.getBalance());
-		existingStock.setInward(stock.getInward());
-		existingStock.setOutward(stock.getOutward());
-		existingStock.setTransactionType(stock.getTransactionType());
-
-		return stockRepository.save(existingStock);
+	public void deleteStock(Long id) {
+		stockRepo.deleteById(id);
 	}
 
 	@Override
-	public String deleteStock(Long stockId) {
-		if (!stockRepository.existsById(stockId)) {
-			throw new ResourceNotFoundException("Stock entry with the given ID not found", 404, LocalDateTime.now());
-		}
+	public StockDTO getStockById(Long id) {
+		return StockMapper.toDto(stockRepo.findById(id).orElseThrow(() -> new RuntimeException("Stock not found")));
+	}
 
-		stockRepository.deleteById(stockId);
-		return "Stock entry deleted successfully!";
+	@Override
+	public List<StockDTO> getAllStocks() {
+		return stockRepo.findAll().stream().map(StockMapper::toDto).collect(Collectors.toList());
 	}
 }

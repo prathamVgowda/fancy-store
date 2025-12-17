@@ -1,17 +1,28 @@
 package com.shop.dto;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
+
 public class StockDTO {
 
 	private Long id;
-
+	
+	@NotNull(message = "Product is required")
     private Long productId;
 
+    @NotNull(message = "Balance is required")
+    @PositiveOrZero(message = "Balance cannot be negative")
     private Integer balance;
 
-    private Integer inward; 
+    @NotNull(message = "Inward is required")
+    @PositiveOrZero(message = "Inward cannot be negative")
+    private Integer inward;
 
+    @NotNull(message = "Outward is required")
+    @PositiveOrZero(message = "Outward cannot be negative")
     private Integer outward;
-
+    
+    @NotNull(message = "Transaction type is required")
     private String transactionType;
 
 	public Long getId() {

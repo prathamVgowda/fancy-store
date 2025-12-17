@@ -2,16 +2,26 @@ package com.shop.dto;
 
 import java.math.BigDecimal;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
+
 public class OrderItemDTO {
 	private Long id;
 
-	private Long orderId;
+	@NotNull(message = "Order ID is required")
+    private Long orderId;
 
-	private Long productId;
+    @NotNull(message = "Product ID is required")
+    private Long productId;
 
-	private Integer quantity;
+    @NotNull(message = "Quantity is required")
+    @Positive(message = "Quantity must be greater than zero")
+    private Integer quantity;
 
-	private BigDecimal price;
+    @NotNull(message = "Price is required")
+    @PositiveOrZero(message = "Price cannot be negative")
+    private BigDecimal price;
 
 	public Long getId() {
 		return id;

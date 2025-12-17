@@ -1,18 +1,17 @@
 package com.shop.service;
 
 import java.util.List;
-
-import com.shop.entity.Stock;
+import com.shop.dto.StockDTO;
 
 public interface StockService {
 
-	Stock createStock(Stock stock);
+    StockDTO createStock(StockDTO dto);
 
-	Stock getStockById(Long stockId);
+    StockDTO updateStock(Long id, StockDTO dto);
 
-	List<Stock> getAllStocks();
+    void deleteStock(Long id);
 
-	Stock updateStock(Long stockId, Stock stock);
+    StockDTO getStockById(Long id);
 
-	String deleteStock(Long stockId);
+    List<StockDTO> getAllStocks();
 }

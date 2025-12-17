@@ -2,41 +2,40 @@ package com.shop.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import com.shop.entity.Products;
-import com.shop.service.ProductsService;
-
+import com.shop.service.ProductService;
 import java.util.List;
+import com.shop.dto.ProductDTO;
 
 @RestController
 @RequestMapping("/api/products")
 public class ProductsController {
 
 	@Autowired
-	private ProductsService productsService;
+	private ProductService productService;
 
 	@PostMapping("/create")
-	public Products createProduct(@RequestBody Products product) {
-		return productsService.createProduct(product);
+	public ProductDTO createProduct(@RequestBody ProductDTO dto) {
+		return productService.createProduct(dto);
 	}
 
 	@GetMapping("/{productId}")
-	public Products getProductById(@PathVariable Long productId) {
-		return productsService.getByIdProduct(productId);
+	public ProductDTO getProductById(@PathVariable Long productId) {
+		return productService.getProductById(productId);
 	}
 
 	@GetMapping("/all")
-	public List<Products> getAllProducts() {
-		return productsService.getAllProducts();
+	public List<ProductDTO> getAllProducts() {
+		return productService.getAllProducts();
 	}
 
 	@PutMapping("/update/{productId}")
-	public Products updateProduct(@PathVariable Long productId, @RequestBody Products product) {
-		return productsService.updateByProduct(productId, product);
+	public ProductDTO updateProduct(@PathVariable Long productId, @RequestBody ProductDTO dto) {
+		return productService.updateProduct(productId, dto);
 	}
 
 	@DeleteMapping("/delete/{productId}")
 	public String deleteProduct(@PathVariable Long productId) {
-		return productsService.deleteByProduct(productId);
+		productService.deleteProduct(productId);
+		return "Product deleted successfully!";
 	}
 }

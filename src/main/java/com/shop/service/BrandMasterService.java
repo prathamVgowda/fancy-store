@@ -2,17 +2,17 @@ package com.shop.service;
 
 import java.util.List;
 
-import com.shop.entity.BrandMaster;
+import com.shop.dto.BrandMasterDTO;
 
 public interface BrandMasterService {
 
-    BrandMaster createBrand(BrandMaster brand);
+	BrandMasterDTO create(BrandMasterDTO dto);
 
-    BrandMaster getByIdBrand(Long id);
+	BrandMasterDTO update(Long id, BrandMasterDTO dto);
 
-    List<BrandMaster> getAllBrand();
+	BrandMasterDTO getById(Long id);
 
-    BrandMaster updateByBrand(Long id, BrandMaster brand);
+	List<BrandMasterDTO> getAll();
 
-    String deleteByBrand(Long id);
+	void delete(Long id);
 }

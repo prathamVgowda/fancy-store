@@ -1,14 +1,23 @@
 package com.shop.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+
 public class UserDTO {
 	private Long id;
 
+	@NotBlank(message = "Email is required")
+    @Email(message = "Invalid email format")
 	private String username;
 
+	@NotBlank(message = "Email is required")
+    @Email(message = "Invalid email format")
 	private String email;
 
+	@NotBlank(message = "Role is required")
 	private String roles;
 
+	@NotBlank(message = "Mobile number is mandatory")
 	private String Mobileno;
 
 	public Long getId() {

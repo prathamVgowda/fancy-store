@@ -1,9 +1,9 @@
 package com.shop.mapper;
 
 import com.shop.dto.StockDTO;
+import com.shop.entity.Product;
 import com.shop.entity.Stock;
 import com.shop.entity.Stock.TransactionType;
-import com.shop.entity.Products;
 
 public class StockMapper {
 
@@ -19,7 +19,7 @@ public class StockMapper {
 		return dto;
 	}
 
-	public static Stock toEntity(StockDTO dto, Products product) {
+	public static Stock toEntity(StockDTO dto, Product product) {
 		Stock stock = new Stock();
 
 		stock.setId(dto.getId());
@@ -32,7 +32,7 @@ public class StockMapper {
 		return stock;
 	}
 
-	public static void copyToExisting(Stock existing, StockDTO dto, Products product) {
+	public static void copyToExisting(Stock existing, StockDTO dto, Product product) {
 		existing.setProduct(product);
 		existing.setBalance(dto.getBalance());
 		existing.setInward(dto.getInward());

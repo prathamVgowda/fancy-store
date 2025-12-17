@@ -1,42 +1,52 @@
 package com.shop.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import com.shop.entity.BrandMaster;
+import com.shop.dto.BrandMasterDTO;
 import com.shop.service.BrandMasterService;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 @RestController
-@RequestMapping("/api/brand")
+@RequestMapping("/api/brands")
 public class BrandMasterController {
 
-	@Autowired
-	private BrandMasterService brandMasterService;
+    private final BrandMasterService service;
 
-	@PostMapping("/create")
-	public BrandMaster createBrand(@RequestBody BrandMaster brand) {
-		return brandMasterService.createBrand(brand);
-	}
+    public BrandMasterController(BrandMasterService service) {
+        this.service = service;
+    }
 
-	@GetMapping("/{brandId}")
-	public BrandMaster getBrandById(@PathVariable Long brandId) {
-		return brandMasterService.getByIdBrand(brandId);
-	}
+    @PostMapping
+    public BrandMasterDTO create(@RequestBody BrandMasterDTO dto) {
+        return service.create(dto);
+    }
 
-	@GetMapping("/all")
-	public List<BrandMaster> getAllBrand() {
-		return brandMasterService.getAllBrand();
-	}
+    @GetMapping("/{id}")
+    public BrandMasterDTO getById(@PathVariable Long id) {
+        return service.getById(id);
+    }
 
-	@PutMapping("/update/{brandId}")
-	public BrandMaster updateBrand(@PathVariable Long brandId, @RequestBody BrandMaster brand) {
-		return brandMasterService.updateByBrand(brandId, brand);
-	}
+    @GetMapping
+    public List<BrandMasterDTO> getAll() {
+        return service.getAll();
+    }
 
-	@DeleteMapping("/delete/{brandId}")
-	public String deleteBrand(@PathVariable Long brandId) {
-		return brandMasterService.deleteByBrand(brandId);
-	}
+    @PutMapping("/{id}")
+    public BrandMasterDTO update(@PathVariable Long id, @RequestBody BrandMasterDTO dto) {
+        return service.update(id, dto);
+    }
+
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable Long id) {
+        service.delete(id);
+        return "Brand deleted successfully";
+    }
 }

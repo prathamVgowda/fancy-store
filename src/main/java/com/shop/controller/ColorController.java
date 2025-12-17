@@ -1,42 +1,45 @@
 package com.shop.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.shop.entity.Color;
+import com.shop.dto.ColorDTO;
 import com.shop.service.ColorService;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/color")
+@RequestMapping("/api/colors")
 public class ColorController {
 
-	@Autowired
-	private ColorService colorService;
+	private final ColorService service;
 
-	@PostMapping("/create")
-	public Color createColor(@RequestBody Color color) {
-		return colorService.createColor(color);
+	public ColorController(ColorService service) {
+		this.service = service;
 	}
 
-	@GetMapping("/{colorId}")
-	public Color getColorById(@PathVariable Long colorId) {
-		return colorService.getByIdColor(colorId);
+	@PostMapping
+	public ColorDTO create(@RequestBody ColorDTO dto) {
+		return service.create(dto);
 	}
 
-	@GetMapping("/all")
-	public List<Color> getAllColor() {
-		return colorService.getAllColor();
+	@GetMapping("/{id}")
+	public ColorDTO getById(@PathVariable Long id) {
+		return service.getById(id);
 	}
 
-	@PutMapping("/update/{colorId}")
-	public Color updateColor(@PathVariable Long colorId, @RequestBody Color color) {
-		return colorService.updateByColor(colorId, color);
+	@GetMapping
+	public List<ColorDTO> getAll() {
+		return service.getAll();
 	}
 
-	@DeleteMapping("/delete/{colorId}")
-	public String deleteColor(@PathVariable Long colorId) {
-		return colorService.deleteByColor(colorId);
+	@PutMapping("/{id}")
+	public ColorDTO update(@PathVariable Long id, @RequestBody ColorDTO dto) {
+		return service.update(id, dto);
+	}
+
+	@DeleteMapping("/{id}")
+	public String delete(@PathVariable Long id) {
+		service.delete(id);
+		return "Color deleted successfully";
 	}
 }

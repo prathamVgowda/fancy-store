@@ -1,15 +1,18 @@
 package com.shop.service;
 
-import com.shop.entity.User;
+import java.util.List;
 
-public interface UserService 
-{
+import com.shop.dto.UserDTO;
 
-	public User saveUser(User user);
-		
-	public User getByIdUser(Long userId);
-	
-	public User updateByUser(Long userId, User user);
-	
-	public String DeletByUser(Long userId);
+public interface UserService {
+
+    UserDTO createUser(UserDTO dto);
+
+    UserDTO updateUser(Long id, UserDTO dto);
+
+    void deleteUser(Long id);
+
+    UserDTO getUserById(Long id);
+
+    List<UserDTO> getAllUsers();
 }
