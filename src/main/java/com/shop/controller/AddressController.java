@@ -1,8 +1,9 @@
 package com.shop.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.shop.entity.Address;
+import com.shop.dto.AddressDTO;
 import com.shop.service.AddressService;
 
 import java.util.List;
@@ -11,29 +12,30 @@ import java.util.List;
 @RequestMapping("/api/addresses")
 public class AddressController {
 
-	private final AddressService addressService;
+	@Autowired
+	private AddressService addressService;
 
 	public AddressController(AddressService addressService) {
 		this.addressService = addressService;
 	}
 
 	@PostMapping
-	public Address create(@RequestBody Address address) {
-		return addressService.createAddress(address);
+	public AddressDTO create(@RequestBody AddressDTO dto) {
+		return addressService.createAddress(dto);
 	}
 
 	@GetMapping("/{id}")
-	public Address getById(@PathVariable Long id) {
+	public AddressDTO getById(@PathVariable Long id) {
 		return addressService.getAddressById(id);
 	}
 
 	@GetMapping
-	public List<Address> getAll() {
+	public List<AddressDTO> getAll() {
 		return addressService.getAllAddresses();
 	}
 
 	@PutMapping("/{id}")
-	public Address update(@PathVariable Long id, @RequestBody Address address) {
+	public AddressDTO update(@PathVariable Long id, @RequestBody AddressDTO address) {
 		return addressService.updateAddress(id, address);
 	}
 

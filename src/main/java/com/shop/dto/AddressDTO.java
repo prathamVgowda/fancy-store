@@ -1,5 +1,7 @@
 package com.shop.dto;
 
+import com.shop.entity.Address;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
@@ -9,6 +11,10 @@ public class AddressDTO {
 
 	@NotBlank(message = "User ID is required")
 	private Long userId;
+
+	private String username;
+
+	private String email;
 
 	@NotBlank(message = "Full name is required")
 	private String fullName;
@@ -27,7 +33,7 @@ public class AddressDTO {
 	private String pincode;
 
 	@NotBlank(message = "Address type is required")
-	private String type;
+	private Address.AddressType type;
 
 	public Long getId() {
 		return id;
@@ -85,12 +91,28 @@ public class AddressDTO {
 		this.pincode = pincode;
 	}
 
-	public String getType() {
+	public Address.AddressType getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(Address.AddressType type) {
 		this.type = type;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }

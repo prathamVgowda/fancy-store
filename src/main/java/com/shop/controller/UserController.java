@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
-@Tag(name = "Order API", description = "Order management APIs")
+@Tag(name = "Fancy Store", description = "APIs for managing Fancy Store")
 public class UserController {
 
 	@Autowired

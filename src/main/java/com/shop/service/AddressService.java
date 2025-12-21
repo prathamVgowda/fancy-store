@@ -2,17 +2,17 @@ package com.shop.service;
 
 import java.util.List;
 
-import com.shop.entity.Address;
+import com.shop.dto.AddressDTO;
 
 public interface AddressService {
 
-	Address createAddress(Address address);
+    AddressDTO createAddress(AddressDTO dto);
 
-	Address updateAddress(Long id, Address address);
+    AddressDTO updateAddress(Long id, AddressDTO dto);
 
-	void deleteAddress(Long id);
+    void deleteAddress(Long id);
 
-	Address getAddressById(Long id);
+    AddressDTO getAddressById(Long id);
 
-	List<Address> getAllAddresses();
+    List<AddressDTO> getAllAddresses();
 }

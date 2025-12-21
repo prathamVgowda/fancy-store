@@ -20,7 +20,8 @@ public class BrandMasterServiceImpl implements BrandMasterService {
 	}
 
 	@Override
-	public BrandMasterDTO create(BrandMasterDTO dto) {
+	public BrandMasterDTO create(BrandMasterDTO dto) 
+	{
 		BrandMaster brand = BrandMasterMapper.toEntity(dto);
 		return BrandMasterMapper.toDto(repo.save(brand));
 	}
