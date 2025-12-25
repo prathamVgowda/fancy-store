@@ -15,9 +15,6 @@ public class AddressController {
 	@Autowired
 	private AddressService addressService;
 
-	public AddressController(AddressService addressService) {
-		this.addressService = addressService;
-	}
 
 	@PostMapping
 	public AddressDTO create(@RequestBody AddressDTO dto) {

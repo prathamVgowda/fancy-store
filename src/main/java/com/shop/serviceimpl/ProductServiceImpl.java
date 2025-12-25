@@ -30,10 +30,19 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public ProductDTO createProduct(ProductDTO dto) {
 
-		Category category = categoryRepo.findById(dto.getId())
+		if (dto.getCategoryId() == null) {
+			throw new RuntimeException("Category ID is required");
+		}
+
+		if (dto.getBrandId() == null) {
+			throw new RuntimeException("Brand ID is required");
+		}
+
+		Category category = categoryRepo.findById(dto.getCategoryId())
 				.orElseThrow(() -> new RuntimeException("Category not found"));
 
-		BrandMaster brand = brandRepo.findById(dto.getId()).orElseThrow(() -> new RuntimeException("Brand not found"));
+		BrandMaster brand = brandRepo.findById(dto.getBrandId())
+				.orElseThrow(() -> new RuntimeException("Brand not found"));
 
 		Product product = ProductMapper.toEntity(dto, category, brand);
 

@@ -13,17 +13,18 @@ public class ProductMapper {
 		dto.setId(product.getId());
 		dto.setProductName(product.getProductName());
 		dto.setPrice(product.getPrice());
+		dto.setCategoryId(product.getCategory().getId());
+		dto.setBrandId(product.getBrand().getId());
+
 		dto.setCategoryName(product.getCategory().getCategoryName());
 		dto.setBrandName(product.getBrand().getBrandName());
 
 		return dto;
 	}
 
-	public static Product toEntity(ProductDTO dto,	Category category, BrandMaster brandMaster) 
-	{
+	public static Product toEntity(ProductDTO dto, Category category, BrandMaster brandMaster) {
 		Product product = new Product();
 
-		product.setId(dto.getId());
 		product.setProductName(dto.getProductName());
 		product.setCategory(category);
 		product.setBrand(brandMaster);
@@ -36,6 +37,6 @@ public class ProductMapper {
 		existing.setPrice(dto.getPrice());
 		existing.setCategory(category);
 		existing.setBrand(brandMaster);
-		
+
 	}
 }

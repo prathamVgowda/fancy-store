@@ -22,6 +22,9 @@ public class OrderItemDTO {
     @NotNull(message = "Price is required")
     @PositiveOrZero(message = "Price cannot be negative")
     private BigDecimal price;
+    
+    private String Productname;
+    private String ordername;
 
 	public Long getId() {
 		return id;
@@ -63,4 +66,20 @@ public class OrderItemDTO {
 		this.price = price;
 	}
 
+	public String getProductname() {
+		return Productname;
+	}
+
+	public void setProductname(String productname) {
+		Productname = productname;
+	}
+
+	public String getOrdername() {
+		return ordername;
+	}
+
+	public void setOrdername(String ordername) {
+		this.ordername = ordername;
+	}
+	
 }

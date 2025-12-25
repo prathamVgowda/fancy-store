@@ -14,11 +14,16 @@ public class ProductDTO {
     @Positive(message = "Price must be greater than zero")
     private Double price;
 
-    @NotBlank(message = "Category name is required")
-    private String categoryName;
+    @NotNull(message = "Category is required")
+    private Long categoryId;
 
-    @NotBlank(message = "Brand name is required")
+    @NotNull(message = "Brand is required")
+    private Long brandId;
+
+    private String categoryName;
     private String brandName;
+    
+    
 	public Long getId() {
 		return id;
 	}
@@ -58,5 +63,22 @@ public class ProductDTO {
 	public void setBrandName(String brandName) {
 		this.brandName = brandName;
 	}
+
+	public Long getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(Long categoryId) {
+		this.categoryId = categoryId;
+	}
+
+	public Long getBrandId() {
+		return brandId;
+	}
+
+	public void setBrandId(Long brandId) {
+		this.brandId = brandId;
+	}
+	
 
 }

@@ -23,6 +23,9 @@ public class OrderDTO {
 	@NotBlank(message = "Order status is required")
 	private String status;
 
+	private String addressname;
+	private String username;
+
 	public Long getId() {
 		return id;
 	}
@@ -61,6 +64,22 @@ public class OrderDTO {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getAddressname() {
+		return addressname;
+	}
+
+	public void setAddressname(String addressname) {
+		this.addressname = addressname;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 }

@@ -14,7 +14,6 @@ public class ColorMapper {
 
 	public static Color toEntity(ColorDTO dto) {
 		Color color = new Color();
-		color.setId(dto.getId());
 		color.setColorName(dto.getColorName());
 		return color;
 	}

@@ -15,6 +15,8 @@ public class OrderItemMapper {
 		dto.setProductId(item.getProductVariantId().getId());
 		dto.setQuantity(item.getQuantity());
 		dto.setPrice(item.getPrice());
+		
+		dto.setProductname(item.getProductVariantId().getProductName());
 
 		return dto;
 	}
@@ -22,7 +24,6 @@ public class OrderItemMapper {
 	public static OrderItem toEntity(OrderItemDTO dto, Order order, Product product) {
 		OrderItem item = new OrderItem();
 
-		item.setId(dto.getId());
 		item.setOrderId(order);
 		item.setProductVariantId(product);
 		item.setQuantity(dto.getQuantity());

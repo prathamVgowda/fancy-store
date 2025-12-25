@@ -11,10 +11,13 @@ public class OrderMapper {
 
 		OrderDTO dto = new OrderDTO();
 		dto.setId(order.getId());
-		dto.setAddressId(order.getAddressId().getId());
-		dto.setUserId(order.getUser().getUserId());
+		dto.setAddressname(order.getAddressId().getAddress());
+		dto.setUsername(order.getUser().getUsername());
+		
 		dto.setTotalAmount(order.getTotalAmount());
 		dto.setStatus(order.getStatus().toString());
+		dto.setAddressId(order.getAddressId().getId());
+		dto.setUserId(order.getUser().getUserId());
 
 		return dto;
 
@@ -23,7 +26,6 @@ public class OrderMapper {
 	public static Order toEntity(OrderDTO dto, User user, Address address) {
 		Order order = new Order();
 
-		order.setId(dto.getId());
 		order.setAddressId(address);
 		order.setUser(user);
 		order.setTotalAmount(dto.getTotalAmount());

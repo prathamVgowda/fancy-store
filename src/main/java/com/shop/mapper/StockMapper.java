@@ -22,7 +22,6 @@ public class StockMapper {
 	public static Stock toEntity(StockDTO dto, Product product) {
 		Stock stock = new Stock();
 
-		stock.setId(dto.getId());
 		stock.setProduct(product);
 		stock.setBalance(dto.getBalance());
 		stock.setInward(dto.getInward());

@@ -14,7 +14,6 @@ public class BrandMasterMapper {
 
 	public static BrandMaster toEntity(BrandMasterDTO dto) {
 		BrandMaster brand = new BrandMaster();
-		brand.setId(dto.getId());
 		brand.setBrandName(dto.getBrandName());
 		return brand;
 	}
