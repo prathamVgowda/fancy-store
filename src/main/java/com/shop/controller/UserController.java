@@ -6,6 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.shop.dto.UserDTO;
+import com.shop.entity.User;
+import com.shop.repository.UserRepository;
+import com.shop.service.EmailService;
 import com.shop.service.UserService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -19,6 +22,12 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private UserRepository userRepository;
+	
+	@Autowired
+	private EmailService emailService;
 
 	@PostMapping
 	public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO dto) {
@@ -49,4 +58,29 @@ public class UserController {
 		userService.deleteUser(userId);
 		return ResponseEntity.ok("User deleted successfully");
 	}
+	
+	@PostMapping("/verify")
+    public String verifyUser(@RequestParam String email, @RequestParam String code) {
+        User user = userRepository.findByEmail(email);
+
+        if (user == null) {
+            return "User not found.";
+        }
+
+        if (user.isVerified()) {
+            return "User already verified.";
+        }
+
+        if (user.getVerificationCode().equals(code)) {
+            user.setVerified(true);
+            user.setVerificationCode(null);
+            userRepository.save(user);
+
+            emailService.sendRegistrationSuccessEmail(user.getEmail(), user.getUsername());
+
+            return "User verified and registered successfully!";
+        } else {
+            return "Invalid verification code.";
+        }
+    }
 }
